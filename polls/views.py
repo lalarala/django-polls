@@ -1,7 +1,10 @@
+
 from django.shortcuts import render
 from django.http import HttpResponse
 
 from .models import Question
+
+
 
 
 def index(request):
@@ -23,9 +26,14 @@ def vote(request, question_id):
     return HttpResponse("You're voting on question %s." % question_id)
 
 
-    form django.views.generic.edit import  CreateView
-    from django.urls import reverse_lazy
+from django.views.generic.edit import  CreateView, UpdateView
+from django.urls import reverse_lazy
 
-    class QuestionCreateView(CreateView):
-        model=question
-        success_urls: reverse_lazy('index') 
+
+
+
+class QuestionUpdateView(UpdateView):
+    model = Question
+    template_name = 'polls/question_form.html'
+    fields = ('question_text', 'pub_date', )
+    success_url = reverse_lazy('polls_list')
