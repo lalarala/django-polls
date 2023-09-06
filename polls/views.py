@@ -4,6 +4,8 @@ from django.http import HttpResponse
 
 from .models import Question
 
+from django.contrib import messages
+
 
 
 
@@ -51,7 +53,12 @@ class QuestionDetailView(DetailView):
 class QuestionDeleteView(DeleteView):
     model = Question
     success_url = reverse_lazy("question-list")
+    success_message = "enquete excluída com sucesso"
 
+
+def form_valid(self, form):
+    messages.success(self.request, self.success_message)
+    return super ().form_valid(form)
 
 class QuestionUpdateView(UpdateView):
     model = Question
