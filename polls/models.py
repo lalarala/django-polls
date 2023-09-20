@@ -1,10 +1,11 @@
+import datetime
 from django.db import models
 
 # Create your models here.
+from django.utils import timezone
 
 
-
- class Question(models.Model):
+class Question(models.Model):
     question_text = models.CharField(max_length=300)
     pub_date = models.DateTimeField("date published", default=timezone.now)
     
@@ -12,7 +13,7 @@ from django.db import models
         return self.question_text
 
     def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        return self.pub_date >= datetime.timezone.now() - datetime.timedelta(days=1)
 
 
 class Choice(models.Model):

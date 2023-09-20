@@ -31,7 +31,7 @@ def vote(request, question_id):
 
 
 
-from django.views.generic import CreateView, ListView, DetailView, DeleteView
+from django.views.generic import CreateView, ListView, DetailView, DeleteView,UpdateView
 from django.urls import reverse_lazy
 
 class QuestionCreateView(CreateView):
@@ -56,9 +56,9 @@ class QuestionDeleteView(DeleteView):
     success_message = "enquete excluída com sucesso"
 
 
-def form_valid(self, form):
-    messages.success(self.request, self.success_message)
-    return super ().form_valid(form)
+    def form_valid(self, form):
+        messages.success(self.request, self.success_message)
+        return super ().form_valid(form)
 
 class QuestionUpdateView(UpdateView):
     model = Question
