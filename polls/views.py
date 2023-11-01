@@ -58,8 +58,13 @@ class QuestionDeleteView(DeleteView):
     success_url = reverse_lazy("question-list")
     success_message = "enquete excluída com sucesso"
 
+    def get_context_data(self, **kwargs):
+    Context = super(QuestioncreateView, self).get_context_data(**kwargs)
+    Context['form títle'] = 'Criando um pergunta"
+    return Context
 
     def form_valid(self, form):
+        form.instance.author = self.request.user
         messages.success(self.request, self.success_message)
         return super ().form_valid(form)
 
