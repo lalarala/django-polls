@@ -22,18 +22,24 @@ class AccountCreateView(CreateView):
         messages.success(self.request, self.success_message)
         return super(AccountCreateView, self).form_valid(form)
 
+
+
 class AccountUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     template_name = 'accounts/user_form.html'
-    fields = ('first_name', 'email', 'imagem', ) # incluir os campos que deseja liberar a edição
-    success_url = reverse_lazy('polls_all') # rota para redirecionar após a edição
-    success_message = 'Perfil atualizado com sucesso!'
-    def get_queryset(self): # método que altera o objeto recuperado pela view
-    user_id = self.kwargs.get('pk') # recupera o argumento vindo na URL / rota
-    user = self.request.user
-    if user is None or not user.is_authenticated or user_id != user.id:
-    return User.objects.none()
-    return User.objects.filter(id=user.id) # apenas o usuário do perfil logado pode editar
-    def form_valid(self, form): # executa quando os dados estiverem válidos
-    messages.success(self.request, self.success_message)
-    return super(AccountUpdateView, self).form_valid(form)
+    fields = ('first_name', 'email', 'imagem')
+    success_url = reverse_lazy('polls_all')
+    success_message = 'Perfil atualizad com sucesso'
+
+    def get_queryset(self):
+       user_id = self.kwargs.get('pk')
+       user = self.request.user
+
+       if user is None or not user.is_authenticated or user_id != user.id:
+           return User.objects.none()
+       
+       return User.objects.filter(id=user.id)
+
+    def form_valid(self, form):
+        messages.success(self.request, self.success_message)
+        return super(AccountUpdateView, self).form_valid(form)
