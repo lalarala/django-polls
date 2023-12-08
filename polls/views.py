@@ -40,7 +40,7 @@ def ultimas_perguntas(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     context = {'latest_question_list': latest_question_list}
     # return render(request, 'polls/perguntas.html', context)
-    return render(request, 'perguntas_recentes.html', context)
+    return render(request, 'polls/perguntas_recentes.html', context)
 
 
 class QuestionCreateView(LoginRequiredMixin, CreateView):
@@ -95,7 +95,7 @@ class QuestionDeleteView(LoginRequiredMixin, DeleteView):
 
 class QuestionDetailView(DetailView):
     model = Question
-    template_name = 'polls/question_detail.html'
+    template_name = 'polls/poll_edit.html'
     context_object_name = 'question'
 
     def get_context_data(self, **kwargs):
@@ -197,7 +197,7 @@ def vote(request, question_id):
             return redirect(reverse_lazy("poll_results", args=(question.id,)))
 
     context = {'question': question}
-    return render(request, 'polls/question_detail.html', context)
+    return render(request, 'polls/poll_edit.html', context)
 
 def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)

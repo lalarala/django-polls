@@ -12,7 +12,7 @@
 
     </ul>
 
-    <a href="{% url 'question-create' %}" > criar nova enquete </a>
+    <a href="{% url 'poll_add' %}" > criar nova enquete </a>
 
 
     <h1>Listar Enquetes</h1>
@@ -20,14 +20,14 @@
     <ul>
         {% for question in questions %}
            <li>
-               <a href="{% url 'question-detail' question.pk %}">
+               <a href="{% url 'poll_edit' question.pk %}">
                    {{ question.question_text }}
                 </a>
             </li>
         {% endfor %}
     </ul>
 
-    <a href="{% url 'question-create' %}">Criar uma nova enquete</a>
+    <a href="{% url 'poll_add' %}">Criar uma nova enquete</a>
     
 <div class="pagination">
     <span class="step-links">
