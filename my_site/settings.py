@@ -140,4 +140,9 @@ INSTALLED_APPS = [
     'accounts',
 ]
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
+MEDIA_URL = '/media/' # Caminho para servir os arquivos de mídia
+MEDIA_ROOT = os.path.join(BASE_DIR, 'files/') # Armazenamento dos arquivos
+
+
 
